@@ -60,6 +60,10 @@ void setup() {
     Serial.begin(9600); // the USB serial port 
     Serial1.begin(115200);  // the LoRa device
 
+    delay(2000);  // XXX for testing only
+    Serial1.println("AT");  // XXX flush out initial error - for testing only
+    Serial1.readString();   // XXX flush out the buffer before proceeding - for testing only
+
     if (LoRa.initDevice(TPP_LORA_HUB_ADDRESS) != 0) {  // initialize the LoRa device
         Serial.println("Error initializing LoRa device");
         while(1) {blinkTimes(50);};

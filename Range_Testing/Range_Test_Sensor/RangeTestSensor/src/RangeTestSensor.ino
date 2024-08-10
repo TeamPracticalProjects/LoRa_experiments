@@ -42,7 +42,7 @@ SYSTEM_THREAD(ENABLED);
 #define VERSION 1.00
 #define STATION_NUM 0 // housekeeping; not used ini the code
 
-#define THIS_LORA_SENSOR_ADDRESS -1 // the address of the sensor
+#define THIS_LORA_SENSOR_ADDRESS 5 // the address of the sensor
 
 // Show system, cloud connectivity, and application logs over USB
 // View logs with CLI using 'particle serial monitor --follow'
@@ -56,6 +56,10 @@ void setup() {
     digitalWrite(D7, HIGH);
     Serial.begin(9600); // the USB serial port 
     Serial1.begin(115200);  // the LoRa device
+
+    delay(2000);    // XXX time to open serial monitor - for testing only
+    Serial1.println("AT");  // XXX dummy command for testing only
+    Serial1.readString();   // flush out the buffer - for testing only
 
     if (LoRa.initDevice(THIS_LORA_SENSOR_ADDRESS) != 0) {  // initialize the LoRa device
         Serial.println("error initializing LoRa device - Stopping");
